@@ -1,4 +1,5 @@
-#pragma once
+#ifndef LA_MATRIX_H
+#define LA_MATRIX_H
 
 #include <iostream>
 #include <vector>
@@ -16,8 +17,11 @@ class Matrix {
         Matrix(const Matrix& other); // Copy constructor
         void set(size_t row, size_t col, double value);
         double get(size_t row, size_t col) const;
-        friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix); // Overloaded output operator for printing
+        // friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix); // Overloaded output operator for printing
+        void print() const;
         ~Matrix() = default; // Default destructor
 };
 
 }
+
+#endif // LA_MATRIX_H

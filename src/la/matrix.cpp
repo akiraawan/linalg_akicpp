@@ -1,4 +1,6 @@
 #include "la/matrix.h"
+#include <iostream>
+#include <vector>
 
 namespace la {
 
@@ -35,14 +37,24 @@ double Matrix::get(size_t row, size_t col) const {
     return data[row][col];
 }
 
-std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
-    for (const auto& row : matrix.data) {
+// std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
+//     for (const auto& row : matrix.data) {
+//         for (const auto& value : row) {
+//             os << value << " ";
+//         }
+//         os << std::endl;
+//     }
+//     return os;
+// }
+
+void Matrix::print() const {
+    for (const auto& row : data) {
         for (const auto& value : row) {
-            os << value << " ";
+            std::cout << value << " ";
         }
-        os << std::endl;
+        std::cout << std::endl;
     }
-    return os;
+
 }
 
 }
