@@ -6,6 +6,8 @@
 
 namespace la {
 
+namespace vector {
+
 class Vector {
 public:
     size_t size;
@@ -38,6 +40,8 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Vector& vector); // Overloaded output operator for printing
 };
 
-}
+} // namespace vector
+
+} // namespace la
 
 #endif // LA_VECTOR_H

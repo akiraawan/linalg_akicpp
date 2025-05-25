@@ -6,6 +6,8 @@
 
 namespace la {
 
+namespace matrix{
+
 class Matrix {
 public:
     size_t rows;
@@ -43,8 +45,8 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix); // Overloaded output operator for printing
 };
 
+} // namespace matrix
 
-
-}
+} // namespace la
 
 #endif // LA_MATRIX_H

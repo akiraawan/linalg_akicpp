@@ -1,8 +1,10 @@
-#include "la/matrix.h"
+#include "matrix/matrix.h"
 #include <iostream>
 #include <vector>
 
 namespace la {
+
+namespace matrix {
 
 Matrix::Matrix(size_t rows, size_t cols)
     : rows(rows), cols(cols), data(rows, std::vector<double>(cols)) {}
@@ -168,4 +170,6 @@ Matrix Matrix::identity(size_t size) {
     return identity;
 }
 
-}
+} // namespace matrix
+
+} // namespace la

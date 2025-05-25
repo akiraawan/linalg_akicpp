@@ -1,8 +1,10 @@
-#include "la/vector.h"
+#include "vector/vector.h"
 #include <iostream>
 #include <vector>
 
 namespace la {
+
+namespace vector {
 
 Vector::Vector(size_t size)
     : size(size), data(size) {}
@@ -132,5 +134,7 @@ std::ostream& operator<<(std::ostream& os, const Vector& vector) {
     os << "]";
     return os;
 }
+
+} // namespace vector
 
 } // namespace la
