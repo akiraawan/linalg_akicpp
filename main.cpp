@@ -1,5 +1,5 @@
-#include "matrix/matrix.h"
-#include "vector/vector.h"
+#include "matrix.h"
+#include "vector.h"
 #include <iostream>
 #include <vector>
 
