@@ -4,12 +4,15 @@
 #include <vector>
 
 int main() {
-    la::vector::Vector v1(3, 1.0);
+    la::matrix::Matrix v1(3, 2, 2);
 
-    std::cout << "Vector v1: " << v1 << std::endl;
+    std::cout << "Matrix v1: \n" << v1 << std::endl;
 
-    la::matrix::Matrix m1(2, 3, 2.0);
-    std::cout << "Matrix m1: \n" << m1 << std::endl;
+    double a = v1(1, 0);
+    std::cout << "Element at (0, 1): " << a << std::endl;
+
+    v1(0, 1) = 5;
+    std::cout << "Updated Matrix v1: \n" << v1 << std::endl;
 
     return 0;
 }

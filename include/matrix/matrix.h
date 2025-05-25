@@ -1,5 +1,5 @@
-#ifndef LA_MATRIX_H
-#define LA_MATRIX_H
+#ifndef MATRIX_H
+#define MATRIX_H
 
 #include <iostream>
 #include <vector>
@@ -23,17 +23,23 @@ public:
     Matrix(Matrix&& other) noexcept; // Move constructor
     ~Matrix() = default; // Default destructor
 
-    void set(size_t row, size_t col, double value);
-    double get(size_t row, size_t col) const;
-
     Matrix& operator=(const Matrix& other); // Copy assignment operator
     Matrix& operator=(Matrix&& other) noexcept; // Move assignment operator
 
+    double& operator()(size_t row, size_t col);
+    const double& operator()(size_t row, size_t col) const;
     Matrix operator+(const Matrix& other) const; // Matrix addition
     Matrix operator-(const Matrix& other) const; // Matrix subtraction
     Matrix operator*(const Matrix& other) const; // Matrix multiplication
     Matrix operator*(double scalar) const; // Scalar multiplication
+
     Matrix transpose() const; // Transpose of the matrix
+    Matrix inverse() const; // Inverse of the matrix (if applicable)
+    Matrix adjugate() const; // Adjugate of the matrix (if applicable)
+    Matrix cofactor() const; // Cofactor matrix (if applicable)
+    Matrix minor(size_t row, size_t col) const; // Minor of the matrix at specified row and column
+    double determinant() const; // Determinant of the matrix (if applicable)
+    double trace() const; // Trace of the matrix (if applicable)
 
     bool operator==(const Matrix& other) const; // Equality comparison
     bool operator!=(const Matrix& other) const; // Inequality comparison

@@ -1,5 +1,5 @@
-#ifndef LA_VECTOR_H
-#define LA_VECTOR_H
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <iostream>
 #include <vector>

@@ -37,20 +37,6 @@ Matrix::Matrix(Matrix&& other) noexcept
     other.cols = 0;
 }
 
-void Matrix::set(size_t row, size_t col, double value) {
-    if (row >=  rows || col >= cols) {
-        throw std::out_of_range("Index out of range.");
-    }
-    data[row][col] = value;
-}
-
-double Matrix::get(size_t row, size_t col) const {
-    if (row >= rows || col >= cols) {
-        throw std::out_of_range("Index out of range.");
-    }
-    return data[row][col];
-}
-
 Matrix& Matrix::operator=(const Matrix& other) {
     if (this != &other) {
         rows = other.rows;
@@ -58,6 +44,31 @@ Matrix& Matrix::operator=(const Matrix& other) {
         data = other.data;
     }
     return *this;
+}
+
+Matrix& Matrix::operator=(Matrix&& other) noexcept {
+    if (this != &other) {
+        rows = other.rows;
+        cols = other.cols;
+        data = std::move(other.data);
+        other.rows = 0;
+        other.cols = 0;
+    }
+    return *this;
+}
+
+double& Matrix::operator()(size_t row, size_t col) {
+    if (row >= rows || col >= cols) {
+        throw std::out_of_range("Index out of range.");
+    }
+    return data[row][col];
+}
+
+const double& Matrix::operator()(size_t row, size_t col) const {
+    if (row >= rows || col >= cols) {
+        throw std::out_of_range("Index out of range.");
+    }
+    return data[row][col];
 }
 
 Matrix Matrix::operator+(const Matrix& other) const {
@@ -119,6 +130,53 @@ Matrix Matrix::transpose() const {
         }
     }
     return result;
+}
+
+Matrix Matrix::inverse() const {
+    // Placeholder for inverse implementation
+    throw std::logic_error("Inverse is not implemented yet.");
+}
+
+Matrix Matrix::adjugate() const {
+    // Placeholder for adjugate implementation
+    throw std::logic_error("Adjugate is not implemented yet.");
+}
+
+Matrix Matrix::cofactor() const {
+    // Placeholder for cofactor implementation
+    throw std::logic_error("Cofactor is not implemented yet.");
+}
+
+Matrix Matrix::minor(size_t row, size_t col) const {
+    if (row >= rows || col >= cols) {
+        throw std::out_of_range("Index out of range for minor.");
+    }
+    Matrix result(rows - 1, cols - 1);
+    for (size_t i = 0, r = 0; i < rows; ++i) {
+        if (i == row) continue;
+        for (size_t j = 0, c = 0; j < cols; ++j) {
+            if (j == col) continue;
+            result.data[r][c++] = data[i][j];
+        }
+        ++r;
+    }
+    return result;
+}
+
+double Matrix::determinant() const {
+    // Placeholder for determinant implementation
+    throw std::logic_error("Determinant is not implemented yet.");
+}
+
+double Matrix::trace() const {
+    if (rows != cols) {
+        throw std::invalid_argument("Trace can only be calculated for square matrices.");
+    }
+    double sum = 0.0;
+    for (size_t i = 0; i < rows; ++i) {
+        sum += data[i][i];
+    }
+    return sum;
 }
 
 bool Matrix::operator==(const Matrix& other) const {
