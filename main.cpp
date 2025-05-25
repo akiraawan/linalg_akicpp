@@ -4,15 +4,15 @@
 #include <vector>
 
 int main() {
-    la::matrix::Matrix v1(3, 2, 2);
+    la::vector::Vector v1(3, 1.0);
 
-    std::cout << "Matrix v1: \n" << v1 << std::endl;
+    std::cout << "v1: " << v1 << std::endl;
 
-    double a = v1(1, 0);
-    std::cout << "Element at (0, 1): " << a << std::endl;
+    double value = v1(1);
+    std::cout << "v1(1): " << value << std::endl;
 
-    v1(0, 1) = 5;
-    std::cout << "Updated Matrix v1: \n" << v1 << std::endl;
+    v1(1) = 2.0;
+    std::cout << "v1 after setting v1(1) to 2.0: " << v1 << std::endl;
 
     return 0;
 }

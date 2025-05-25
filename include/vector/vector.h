@@ -20,8 +20,8 @@ public:
     Vector(Vector&& other) noexcept; // Move constructor
     ~Vector() = default; // Default destructor
 
-    void set(size_t index, double value);
-    double get(size_t index) const;
+    double& operator()(size_t index);
+    const double& operator()(size_t index) const;
 
     Vector& operator=(const Vector& other); // Copy assignment operator
     Vector& operator=(Vector&& other) noexcept; // Move assignment operator
