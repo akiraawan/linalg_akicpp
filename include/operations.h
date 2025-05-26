@@ -8,7 +8,11 @@
 
 namespace la {
 
+double dot(const vector::Vector& a, const vector::Vector& b);
 
+vector::Vector dot(const matrix::Matrix& A, const vector::Vector& x);
+
+vector::Vector dot(const vector::Vector& x, const matrix::Matrix& A);
 
 }
 
