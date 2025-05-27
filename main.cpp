@@ -1,18 +1,22 @@
 #include "matrix.h"
 #include "vector.h"
 #include "operations.h"
+#include "slice.h"
 #include <iostream>
 #include <vector>
 
 using namespace la;
 
 int main() {
-    vector::Vector v1({1.0, 2.0, 3.0, 4.0, 5.0});
+    matrix::Matrix A({{1.0, 2.0, 3.0},
+                      {4.0, 5.0, 6.0},
+                      {7.0, 8.0, 9.0}});
 
-    std::cout << "Vector v1: " << v1 << std::endl;
+    std::cout << "Matrix A:\n" << A << std::endl;
 
-    vector::Vector v2 = v1(Slice(1, 4)); // Slicing from index 1 to 3
-    std::cout << "Sliced Vector v2: " << v2 << std::endl;
+    matrix::Matrix B = A(la::Slice(), la::Slice(1, 3));
+    
+    std::cout << "Matrix B: \n" << B << std::endl; // Extracting a submatrix
 
     return 0;
 }
