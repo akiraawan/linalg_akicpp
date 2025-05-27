@@ -138,13 +138,23 @@ Matrix Matrix::inverse() const {
 }
 
 Matrix Matrix::adjugate() const {
-    // Placeholder for adjugate implementation
-    throw std::logic_error("Adjugate is not implemented yet.");
+    if (rows != cols) {
+        throw std::invalid_argument("Adjugate can only be calculated for square matrices.");
+    }
+    return cofactor().transpose();
 }
 
 Matrix Matrix::cofactor() const {
-    // Placeholder for cofactor implementation
-    throw std::logic_error("Cofactor is not implemented yet.");
+    Matrix result(rows, cols);
+    if (rows != cols) {
+        throw std::invalid_argument("Adjugate can only be calculated for square matrices.");
+    }
+    for (size_t i = 0; i < rows; ++i) {
+        for (size_t j = 0; j < cols; ++j) {
+            result.data[i][j] = minor(i, j).determinant() * ((i + j) % 2 == 0 ? 1 : -1);
+        }
+    }
+    return result;
 }
 
 Matrix Matrix::minor(size_t row, size_t col) const {
@@ -164,8 +174,20 @@ Matrix Matrix::minor(size_t row, size_t col) const {
 }
 
 double Matrix::determinant() const {
-    // Placeholder for determinant implementation
-    throw std::logic_error("Determinant is not implemented yet.");
+    if (rows != cols) {
+        throw std::invalid_argument("Determinant can only be calculated for square matrices.");
+    }
+    if (rows == 1) {
+        return data[0][0];
+    }
+    if (rows == 2) {
+        return data[0][0] * data[1][1] - data[0][1] * data[1][0];
+    }
+    double det = 0.0;
+    for (size_t j = 0; j < cols; ++j) {
+        det += data[0][j] * minor(0, j).determinant() * ((j % 2 == 0) ? 1 : -1);
+    }
+    return det;
 }
 
 double Matrix::trace() const {
