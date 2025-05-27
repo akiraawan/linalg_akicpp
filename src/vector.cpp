@@ -1,4 +1,5 @@
 #include "vector.h"
+#include "slice.h"
 #include <iostream>
 #include <vector>
 
@@ -39,6 +40,21 @@ const double& Vector::operator()(size_t index) const {
         throw std::out_of_range("Index out of range.");
     }
     return data[index];
+}
+
+Vector Vector::operator()(const Slice& slice) const {
+    size_t start = slice.start.value_or(0);
+    size_t end = slice.end.value_or(size);
+    
+    if (start >= size || end > size || start >= end) {
+        throw std::out_of_range("Slice indices are out of range.");
+    }
+    
+    Vector result(end - start);
+    for (size_t i = start; i < end; ++i) {
+        result.data[i - start] = data[i];
+    }
+    return result;
 }
 
 Vector& Vector::operator=(const Vector& other) {

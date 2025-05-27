@@ -1,6 +1,8 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include "vector.h"
+#include "slice.h"
 #include <iostream>
 #include <vector>
 
@@ -28,6 +30,10 @@ public:
 
     double& operator()(size_t row, size_t col);
     const double& operator()(size_t row, size_t col) const;
+    Matrix operator()(const Slice& row_slice, const Slice& col_slice);
+    vector::Vector operator()(const Slice& slice, size_t col); // Extract a column as a vector
+    vector::Vector operator()(size_t row, const Slice& slice); // Extract a row as a vector
+
     Matrix operator+(const Matrix& other) const; // Matrix addition
     Matrix operator-(const Matrix& other) const; // Matrix subtraction
     Matrix operator*(const Matrix& other) const; // Matrix multiplication

@@ -1,6 +1,7 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include "slice.h"
 #include <iostream>
 #include <vector>
 
@@ -22,6 +23,7 @@ public:
 
     double& operator()(size_t index);
     const double& operator()(size_t index) const;
+    Vector operator()(const Slice& slice) const;
 
     Vector& operator=(const Vector& other); // Copy assignment operator
     Vector& operator=(Vector&& other) noexcept; // Move assignment operator
