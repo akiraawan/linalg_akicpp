@@ -133,8 +133,14 @@ Matrix Matrix::transpose() const {
 }
 
 Matrix Matrix::inverse() const {
-    // Placeholder for inverse implementation
-    throw std::logic_error("Inverse is not implemented yet.");
+    if (rows != cols) {
+        throw std::invalid_argument("Inverse can only be calculated for square matrices.");
+    }
+    double det = determinant();
+    if (det == 0.0) {
+        throw std::runtime_error("Matrix is singular and cannot be inverted.");
+    }
+    return adjugate() * (1.0 / det);
 }
 
 Matrix Matrix::adjugate() const {

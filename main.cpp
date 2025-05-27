@@ -14,8 +14,8 @@ int main() {
 
     std::cout << "Matrix m1:\n" << m1 << std::endl;
     
-    double m2 = m1.determinant();
-    std::cout << "Determinant of m1: " << m2 << std::endl;
+    matrix::Matrix m2 = m1.inverse();
+    std::cout << "Inverse of m1: " << m2 << std::endl;
 
     return 0;
 }
