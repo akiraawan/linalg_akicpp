@@ -71,6 +71,27 @@ const double& Matrix::operator()(size_t row, size_t col) const {
     return data[row][col];
 }
 
+void Matrix::replace(const Slice& row_slice, const Slice& col_slice, const Matrix& submat) {
+    size_t start_row = row_slice.start.value_or(0);
+    size_t end_row = row_slice.end.value_or(rows);
+    size_t start_col = col_slice.start.value_or(0);
+    size_t end_col = col_slice.end.value_or(cols);
+
+    if (start_row >= rows || end_row > rows || start_col >= cols || end_col > cols || start_row >= end_row || start_col >= end_col) {
+        throw std::out_of_range("Slice indices are out of range.");
+    }
+
+    if (submat.rows != (end_row - start_row) || submat.cols != (end_col - start_col)) {
+        throw std::invalid_argument("Submatrix dimensions do not match the specified slice.");
+    }
+
+    for (size_t i = start_row; i < end_row; ++i) {
+        for (size_t j = start_col; j < end_col; ++j) {
+            data[i][j] = submat.data[i - start_row][j - start_col];
+        }
+    }
+}
+
 Matrix Matrix::operator()(const Slice& row_slice, const Slice& col_slice) const {
     size_t start_row = row_slice.start.value_or(0);
     size_t end_row = row_slice.end.value_or(rows);
@@ -90,6 +111,26 @@ Matrix Matrix::operator()(const Slice& row_slice, const Slice& col_slice) const 
     return result;
 }
 
+void Matrix::replace(const Slice& slice, size_t col, const vector::Vector& subvec) {
+    if (col >= cols) {
+        throw std::out_of_range("Column index out of range.");
+    }
+    size_t start = slice.start.value_or(0);
+    size_t end = slice.end.value_or(rows);
+
+    if (start >= rows || end > rows || start >= end) {
+        throw std::out_of_range("Slice indices are out of range.");
+    }
+
+    if (subvec.size != (end - start)) {
+        throw std::invalid_argument("Replacement vector must match slice size.");
+    }
+
+    for (size_t i = start; i < end; ++i) {
+        data[i][col] = subvec.data[i - start];
+    }
+}
+
 vector::Vector Matrix::operator()(const Slice& slice, size_t col) const {
     if (col >= cols) {
         throw std::out_of_range("Column index out of range.");
@@ -106,6 +147,26 @@ vector::Vector Matrix::operator()(const Slice& slice, size_t col) const {
         result.data[i - start] = data[i][col];
     }
     return result;
+}
+
+void Matrix::replace(size_t row, const Slice& slice, const vector::Vector& subvec) {
+    if (row >= rows) {
+        throw std::out_of_range("Row index out of range.");
+    }
+    size_t start = slice.start.value_or(0);
+    size_t end = slice.end.value_or(cols);
+
+    if (start >= cols || end > cols || start >= end) {
+        throw std::out_of_range("Slice indices are out of range.");
+    }
+
+    if (subvec.size != (end - start)) {
+        throw std::invalid_argument("Replacement vector must match slice size.");
+    }
+
+    for (size_t j = start; j < end; ++j) {
+        data[row][j] = subvec.data[j - start];
+    }
 }
 
 vector::Vector Matrix::operator()(size_t row, const Slice& slice) const {

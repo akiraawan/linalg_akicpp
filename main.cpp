@@ -8,11 +8,21 @@
 using namespace la;
 
 int main() {
-    vector::Vector a1 = vector::Vector({1.0, 2.0, 3.0}); // used initializer list
-    std::cout << "Vector a1: " << a1 << std::endl;
+    matrix::Matrix A(
+    {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    });
 
-    a1.replace(Slice(1, 3), vector::Vector({4.0, 5.0})); // replace elements at indices 1 and 2
-    std::cout << "Vector a1 after replace: " << a1 << std::endl;
+    std::cout << "Matrix A:\n" << A << std::endl;
+
+    vector::Vector v({10, 11});
+
+    std::cout << "Vector v:\n" << v<< std::endl;
+
+    A.replace(Slice(std::nullopt, 2), 1, v);
+    std::cout << "Matrix A after replacing top-left 2x2 with B:\n" << A << std::endl;
 
     return 0;
 }

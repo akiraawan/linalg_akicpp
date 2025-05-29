@@ -53,5 +53,4 @@ matrix::Matrix outer(const vector::Vector& a, const vector::Vector& b) {
     return result;
 }
 
-
 } // namespace la
