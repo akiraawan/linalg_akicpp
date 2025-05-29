@@ -25,6 +25,7 @@ public:
 
     double& operator()(size_t index);
     const double& operator()(size_t index) const;
+    void replace(const Slice& slice, const Vector& subvec); // Replace a slice with another vector
     Vector operator()(const Slice& slice) const;
 
     Vector& operator=(const Vector& other); // Copy assignment operator

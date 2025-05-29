@@ -8,11 +8,11 @@
 using namespace la;
 
 int main() {
-   vector::Vector a1({1.0, 2.0, 3.0, 4.0});
-    std::cout << "a1: " << a1 << std::endl; // Should print [1.0, 2.0, 3.0, 4.0]
+    vector::Vector a1 = vector::Vector({1.0, 2.0, 3.0}); // used initializer list
+    std::cout << "Vector a1: " << a1 << std::endl;
 
-    vector::Vector a2 = a1(la::Slice(1, 3)); // Should slice to [2.0, 3.0]
-    std::cout << "a2: " << a2 << std::endl; // Should print [2.0, 3.0]
+    a1.replace(Slice(1, 3), vector::Vector({4.0, 5.0})); // replace elements at indices 1 and 2
+    std::cout << "Vector a1 after replace: " << a1 << std::endl;
 
     return 0;
 }

@@ -49,6 +49,23 @@ const double& Vector::operator()(size_t index) const {
     return data[index];
 }
 
+void Vector::replace(const Slice& slice, const Vector& subvec) {
+    size_t start = slice.start.value_or(0);
+    size_t end = slice.end.value_or(data.size());
+
+    if (start > end || end > data.size()) {
+        throw std::out_of_range("Invalid slice range.");
+    }
+
+    if (subvec.size != (end - start)) {
+        throw std::invalid_argument("Replacement vector must match slice size.");
+    }
+
+    for (size_t i = 0; i < subvec.size; ++i) {
+        data[start + i] = subvec(i);
+    }
+}
+
 Vector Vector::operator()(const Slice& slice) const {
     size_t start = slice.start.value_or(0);
     size_t end = slice.end.value_or(size);
