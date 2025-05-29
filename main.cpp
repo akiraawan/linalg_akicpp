@@ -8,15 +8,11 @@
 using namespace la;
 
 int main() {
-    matrix::Matrix A({{1.0, 2.0, 3.0},
-                      {4.0, 5.0, 6.0},
-                      {7.0, 8.0, 9.0}});
+   vector::Vector a1({1.0, 2.0, 3.0, 4.0});
+    std::cout << "a1: " << a1 << std::endl; // Should print [1.0, 2.0, 3.0, 4.0]
 
-    std::cout << "Matrix A:\n" << A << std::endl;
-
-    matrix::Matrix B = A(la::Slice(), la::Slice(1, 3));
-    
-    std::cout << "Matrix B: \n" << B << std::endl; // Extracting a submatrix
+    vector::Vector a2 = a1(la::Slice(1, 3)); // Should slice to [2.0, 3.0]
+    std::cout << "a2: " << a2 << std::endl; // Should print [2.0, 3.0]
 
     return 0;
 }

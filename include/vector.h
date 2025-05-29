@@ -6,8 +6,9 @@
 #include <vector>
 
 namespace la {
-
 namespace vector {
+
+class VectorSliceProxy; // Forward declaration
 
 class Vector {
 public:
@@ -17,6 +18,7 @@ public:
     Vector(size_t size); // Constructor to create a vector with specified size
     Vector(size_t size, double value); // Constructor to create a vector with specified size and initial value
     Vector(const std::vector<double>& data); // Constructor to create a vector from a 1D vector
+    Vector(std::initializer_list<double> init);
     Vector(const Vector& other); // Copy constructor
     Vector(Vector&& other) noexcept; // Move constructor
     ~Vector() = default; // Default destructor

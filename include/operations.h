@@ -16,6 +16,8 @@ vector::Vector dot(const vector::Vector& x, const matrix::Matrix& A);
 
 matrix::Matrix outer(const vector::Vector& a, const vector::Vector& b);
 
-}
+
+
+} // namespace la
 
 #endif // LA_OPERATIONS_H

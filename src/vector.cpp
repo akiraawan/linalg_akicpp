@@ -20,6 +20,13 @@ Vector::Vector(const std::vector<double>& data)
     }
 }
 
+Vector::Vector(std::initializer_list<double> init)
+    : size(init.size()), data(init) {
+    if (size == 0) {
+        throw std::invalid_argument("Vector size must be greater than zero.");
+    }
+}
+
 Vector::Vector(const Vector& other)
     : size(other.size), data(other.data) {}
 
