@@ -53,4 +53,16 @@ matrix::Matrix outer(const vector::Vector& a, const vector::Vector& b) {
     return result;
 }
 
+vector::Vector solve_Q(const matrix::Matrix& Q, const vector::Vector& b) {
+    if (Q.rows != Q.cols) {
+        throw std::invalid_argument("Matrix Q must be square.");
+    }
+    if (Q.rows != b.size) {
+        throw std::invalid_argument("Matrix Q rows must match vector b size.");
+    }
+    vector::Vector x = la::dot(Q.transpose(), b);
+
+    return x;
+}
+
 } // namespace la
