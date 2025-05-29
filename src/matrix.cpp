@@ -1,6 +1,6 @@
 #include "matrix.h"
-#include <iostream>
 #include <vector>
+#include <iostream>
 
 namespace la {
 
