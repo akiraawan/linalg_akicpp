@@ -2,6 +2,7 @@
 #include "vector.h"
 #include "operations.h"
 #include "slice.h"
+#include "algorithms.h"
 #include <iostream>
 #include <vector>
 
@@ -15,14 +16,10 @@ int main() {
         {7, 8, 9}
     });
 
-    std::cout << "Matrix A:\n" << A << std::endl;
+    std::cout << "Original Matrix A:\n" << A << std::endl;
 
-    vector::Vector v({10, 11});
+    matrix::Matrix R = algorithms::GS_classical(A);
 
-    std::cout << "Vector v:\n" << v<< std::endl;
-
-    A.replace(Slice(std::nullopt, 2), 1, v);
-    std::cout << "Matrix A after replacing top-left 2x2 with B:\n" << A << std::endl;
-
+    std::cout << "Matrix R:\n" << R << std::endl;
     return 0;
 }

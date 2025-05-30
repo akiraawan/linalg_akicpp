@@ -2,6 +2,7 @@
 #include "vector.h"
 #include "matrix.h"
 #include <iostream>
+#include <cmath>
 
 namespace la {
 
@@ -64,6 +65,16 @@ vector::Vector solve_Q(const matrix::Matrix& Q, const vector::Vector& b) {
     vector::Vector x = la::dot(Q.transpose(), b);
 
     return x;
+}
+
+double norm(const vector::Vector& vec) {
+    double res = 0;
+
+    for (size_t i = 0; i < vec.size; ++i) {
+        res += pow(vec.data[i], 2);
+    }
+    res = pow(res, 0.5);
+    return res;
 }
 
 } // namespace la

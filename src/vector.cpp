@@ -1,5 +1,6 @@
 #include "vector.h"
 #include "slice.h"
+#include <iostream>
 #include <vector>
 
 namespace la {
@@ -13,18 +14,10 @@ Vector::Vector(size_t size, double value)
     : size(size), data(size, value) {}
 
 Vector::Vector(const std::vector<double>& data)
-    : size(data.size()), data(data) {
-    if (size == 0) {
-        throw std::invalid_argument("Vector size must be greater than zero.");
-    }
-}
+    : size(data.size()), data(data) {}
 
 Vector::Vector(std::initializer_list<double> init)
-    : size(init.size()), data(init) {
-    if (size == 0) {
-        throw std::invalid_argument("Vector size must be greater than zero.");
-    }
-}
+    : size(init.size()), data(init) {}
 
 Vector::Vector(const Vector& other)
     : size(other.size), data(other.data) {}
@@ -69,7 +62,7 @@ Vector Vector::operator()(const Slice& slice) const {
     size_t start = slice.start.value_or(0);
     size_t end = slice.end.value_or(size);
     
-    if (start >= size || end > size || start >= end) {
+    if (start >= size || end > size || start > end) {
         throw std::out_of_range("Slice indices are out of range.");
     }
     

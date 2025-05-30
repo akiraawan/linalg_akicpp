@@ -30,10 +30,13 @@ public:
 
     double& operator()(size_t row, size_t col);
     const double& operator()(size_t row, size_t col) const;
+
     void replace(const Slice& row_slice, const Slice& col_slice, const Matrix& submat); // Replace a submatrix with another matrix
     Matrix operator()(const Slice& row_slice, const Slice& col_slice) const;
+
     void replace(const Slice& slice, size_t col, const vector::Vector& subvec); // Replace a column with a vector
     vector::Vector operator()(const Slice& slice, size_t col) const; // Extract a column as a vector
+
     void replace(size_t row, const Slice& slice, const vector::Vector& subvec); // Replace a row with a vector
     vector::Vector operator()(size_t row, const Slice& slice) const; // Extract a row as a vector
 

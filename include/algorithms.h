@@ -10,7 +10,7 @@
 namespace la {
 namespace algorithms {
 
-
+matrix::Matrix GS_classical(matrix::Matrix A);
 
 
 

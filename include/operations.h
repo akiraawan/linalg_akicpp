@@ -17,6 +17,8 @@ matrix::Matrix outer(const vector::Vector& a, const vector::Vector& b);
 
 vector::Vector solve_Q(const matrix::Matrix& Q, const vector::Vector& b);
 
+double norm(const vector::Vector& vec);
+
 } // namespace la
 
 #endif // LA_OPERATIONS_H

@@ -2,6 +2,7 @@
 #define VECTOR_H
 
 #include "slice.h"
+#include <iostream>
 #include <vector>
 
 namespace la {
