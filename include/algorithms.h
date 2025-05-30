@@ -10,9 +10,9 @@
 namespace la {
 namespace algorithms {
 
-matrix::Matrix GS_classical(matrix::Matrix A);
+matrix::Matrix GS_classical(matrix::Matrix& A);
 
-
+matrix::Matrix GS_modified(matrix::Matrix& A);
 
 } // namespace algorithms
 } // namespace la

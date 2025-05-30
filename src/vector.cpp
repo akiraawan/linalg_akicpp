@@ -62,7 +62,7 @@ Vector Vector::operator()(const Slice& slice) const {
     size_t start = slice.start.value_or(0);
     size_t end = slice.end.value_or(size);
     
-    if (start >= size || end > size || start > end) {
+    if (start > size || end > size || start > end) {
         throw std::out_of_range("Slice indices are out of range.");
     }
     
