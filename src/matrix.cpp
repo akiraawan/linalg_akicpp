@@ -321,6 +321,16 @@ double Matrix::trace() const {
     return sum;
 }
 
+vector::Vector Matrix::flatten() const {
+    vector::Vector result(rows * cols);
+    for (size_t i = 0; i < rows; ++i) {
+        for (size_t j = 0; j < cols; ++j) {
+            result.data[i * cols + j] = data[i][j];
+        }
+    }
+    return result;
+}
+
 bool Matrix::operator==(const Matrix& other) const {
     if (rows != other.rows || cols != other.cols) {
         return false;

@@ -52,6 +52,7 @@ public:
     Matrix minor(size_t row, size_t col) const; // Minor of the matrix at specified row and column
     double determinant() const; // Determinant of the matrix (if applicable)
     double trace() const; // Trace of the matrix (if applicable)
+    vector::Vector flatten() const;
     // size_t rank() const; // Rank of the matrix
 
     bool operator==(const Matrix& other) const; // Equality comparison

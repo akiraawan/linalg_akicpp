@@ -22,6 +22,8 @@ Matrix solve_U(Matrix& , Matrix& B);
 
 std::tuple<Matrix, Matrix> householder_qr(Matrix& A);
 
+vector::Vector householder_ls(Matrix& A, vector::Vector& b);
+
 } // namespace algorithms
 } // namespace la
 

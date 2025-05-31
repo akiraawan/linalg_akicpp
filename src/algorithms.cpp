@@ -129,5 +129,24 @@ std::tuple<Matrix, Matrix> householder_qr(Matrix& A) {
     return std::make_tuple(Q, R);
 }
 
+vector::Vector householder_ls(Matrix& A, vector::Vector& b) {
+    size_t m = A.rows;
+    size_t n = A.cols;
+
+    if (m < n) {
+        throw std::invalid_argument("Number of rows must be greater than or equal to the number of columns.");
+    }
+
+    Matrix A_hat = hstack(A, b);
+    householder(A_hat);
+
+    Matrix R = A_hat(Slice(0, n), Slice(0, n));
+    Matrix B = A_hat(Slice(0, n), Slice(n, std::nullopt));
+
+    vector::Vector x = solve_U(R, B).flatten();
+
+    return x;
+}
+
 } // namespace algorithms
 } // namespace la
