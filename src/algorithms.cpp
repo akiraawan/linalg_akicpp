@@ -202,5 +202,34 @@ Matrix hessenbergQ(Matrix& A) {
     }
 }
 
+std::tuple<Vector, double> pow_it(const Matrix& A, const Vector& x0, double tol, size_t max_iter) {
+    size_t m = A.rows;
+    size_t n = A.cols;
+    if (n != m) {
+        throw std::invalid_argument("Matrix A must be square.");
+    }
+    if (m != x0.size) {
+        throw std::invalid_argument("Vector size must match matrix rows.");
+    }
+
+    Vector x = x0;
+    double lambda = 0.0;
+
+    for (size_t iter = 0; iter < max_iter; ++iter) {
+        Vector w = dot(A, x);
+
+        x = w * (1.0 / norm(w));
+
+        lambda = dot(x, w);
+
+        Vector r = w - (x * lambda);
+
+        if (norm(r) < tol) {
+            break;
+        }
+    }
+
+    return std::make_tuple(x, lambda);
+
 } // namespace algorithms
 } // namespace la

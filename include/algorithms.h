@@ -8,6 +8,7 @@
 #include <tuple>
 
 using namespace la::matrix;
+using namespace la::vector;
 
 namespace la {
 namespace algorithms {
@@ -22,11 +23,13 @@ Matrix solve_U(Matrix& , Matrix& B);
 
 std::tuple<Matrix, Matrix> householder_qr(Matrix& A);
 
-vector::Vector householder_ls(Matrix& A, vector::Vector& b);
+Vector householder_ls(Matrix& A, Vector& b);
 
 void hessenberg(Matrix& A);
 
 Matrix hessenbergQ(Matrix& A);
+
+std::tuple<Vector, double> pow_it(const Matrix& A, const Vector& x0, double tol = 1e-6, size_t max_iter = 1000, bool store_iterations = false);
 
 
 } // namespace algorithms
