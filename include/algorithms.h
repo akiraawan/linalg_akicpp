@@ -29,8 +29,7 @@ void hessenberg(Matrix& A);
 
 Matrix hessenbergQ(Matrix& A);
 
-std::tuple<Vector, double> pow_it(const Matrix& A, const Vector& x0, double tol = 1e-6, size_t max_iter = 1000, bool store_iterations = false);
-
+std::tuple<Vector, double> pow_it(const Matrix& A, const Vector& x0, double tol = 1e-6, size_t max_iter = 1000);
 
 } // namespace algorithms
 } // namespace la

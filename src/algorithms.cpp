@@ -230,6 +230,7 @@ std::tuple<Vector, double> pow_it(const Matrix& A, const Vector& x0, double tol,
     }
 
     return std::make_tuple(x, lambda);
+}
 
 } // namespace algorithms
 } // namespace la
