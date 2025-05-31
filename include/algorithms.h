@@ -24,6 +24,11 @@ std::tuple<Matrix, Matrix> householder_qr(Matrix& A);
 
 vector::Vector householder_ls(Matrix& A, vector::Vector& b);
 
+void hessenberg(Matrix& A);
+
+Matrix hessenbergQ(Matrix& A);
+
+
 } // namespace algorithms
 } // namespace la
 

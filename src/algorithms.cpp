@@ -148,5 +148,59 @@ vector::Vector householder_ls(Matrix& A, vector::Vector& b) {
     return x;
 }
 
+void hessenberg(Matrix& A) {
+    size_t m = A.rows;
+
+    for (size_t k = 0; k < m - 2; ++k) {
+        Vector x = A(Slice(k + 1, std::nullopt), k);
+
+        Vector e1 = Vector::zeros_like(x);
+        e1(0) = 1.0;
+
+        Vector vk = x + (e1 * norm(x) * sign(x(0)));
+        vk = vk * (1.0 / norm(vk));
+
+        A.replace(
+            Slice(k + 1, std::nullopt),
+            Slice(k, std::nullopt),
+            A(Slice(k + 1, std::nullopt), Slice(k, std::nullopt)) - 2 * outer(vk, dot(vk, A(Slice(k + 1, std::nullopt), Slice(k, std::nullopt))))
+        );
+        A.replace(
+            Slice(),
+            Slice(k + 1, std::nullopt),
+            A(Slice(), Slice(k + 1, std::nullopt)) - 2 * outer(dot(A(Slice(), Slice(k + 1, std::nullopt)), vk), vk)
+        );
+    }
+}
+
+Matrix hessenbergQ(Matrix& A) {
+    size_t m = A.rows;
+    Matrix Q = Matrix::identity(m);
+
+    for (size_t k = 0; k < m - 2; ++k) {
+        vector::Vector x = A(Slice(k + 1, std::nullopt), k);
+        vector::Vector e1 = vector::Vector::zeros_like(x);
+        e1(0) = 1.0;
+        vector::Vector vk = x + (e1 * norm(x) * sign(x(0)));
+        vk = vk * (1.0 / norm(vk));
+        A.replace(
+            Slice(k + 1, std::nullopt),
+            Slice(k, std::nullopt),
+            A(Slice(k + 1, std::nullopt), Slice(k, std::nullopt)) - 2 * outer(vk, dot(vk, A(Slice(k + 1, std::nullopt), Slice(k, std::nullopt))))
+        );
+        A.replace(
+            Slice(),
+            Slice(k + 1, std::nullopt),
+            A(Slice(), Slice(k + 1, std::nullopt)) - 2 * outer(dot(A(Slice(), Slice(k + 1, std::nullopt)), vk), vk)
+        );
+
+        Q.replace(
+            Slice(),
+            Slice(k + 1, std::nullopt),
+            Q(Slice(), Slice(k + 1, std::nullopt)) - 2 * outer(dot(Q(Slice(), Slice(k + 1, std::nullopt)), vk), vk)
+        );
+    }
+}
+
 } // namespace algorithms
 } // namespace la
