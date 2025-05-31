@@ -13,16 +13,17 @@ int main() {
     {
         {1, 2, 3},
         {4, 5, 6},
-        {7, 8, 9},
-        {10, 11, 12}
+        {7, 8, 9}
     });
 
     std::cout << "Original Matrix A:\n" << A << std::endl;
 
-    matrix::Matrix R = algorithms::GS_classical(A);
+    auto [Q, R] = algorithms::householder_qr(A);
 
-    std::cout << "Matrix R:\n" << R << std::endl;
+    std::cout << "Matrix Q after householder:\n" << Q << std::endl;
 
-    std::cout << "Matrix A after Gram-Schmidt:\n" << A << std::endl;
+    std::cout << "Matrix R after householder:\n" << R << std::endl;
+
+
     return 0;
 }

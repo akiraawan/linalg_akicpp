@@ -57,6 +57,7 @@ public:
     bool operator==(const Matrix& other) const; // Equality comparison
     bool operator!=(const Matrix& other) const; // Inequality comparison
 
+    friend Matrix operator*(const double scalar, const Matrix& matrix); // Scalar multiplication with scalar on the left
     static Matrix zeros(size_t rows, size_t cols);
     static Matrix ones(size_t rows, size_t cols);
     static Matrix identity(size_t size);

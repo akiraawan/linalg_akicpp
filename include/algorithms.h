@@ -7,12 +7,20 @@
 #include "operations.h"
 #include <tuple>
 
+using namespace la::matrix;
+
 namespace la {
 namespace algorithms {
 
-matrix::Matrix GS_classical(matrix::Matrix& A);
+Matrix GS_classical(Matrix& A);
 
-matrix::Matrix GS_modified(matrix::Matrix& A);
+Matrix GS_modified(Matrix& A);
+
+void householder(Matrix& A);
+
+Matrix solve_U(Matrix& , Matrix& B);
+
+std::tuple<Matrix, Matrix> householder_qr(Matrix& A);
 
 } // namespace algorithms
 } // namespace la

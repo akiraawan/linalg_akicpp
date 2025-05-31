@@ -2,12 +2,19 @@
 #include "matrix.h"
 #include "vector.h"
 
+using namespace la::matrix;
+using namespace la::vector;
+
 namespace la {
 namespace algorithms {
 
-matrix::Matrix GS_classical(matrix::Matrix& A) {
+Matrix GS_classical(Matrix& A) {
     size_t n = A.cols;
-    matrix::Matrix R = matrix::Matrix::zeros(n, n);
+    size_t m = A.rows;
+    if (n > m) {
+        throw std::invalid_argument("Number of columns must be less than or equal to the number of rows.");
+    }
+    Matrix R = Matrix::zeros(n, n);
 
     for (size_t j = 0; j < n; ++j) {
 
@@ -36,9 +43,9 @@ matrix::Matrix GS_classical(matrix::Matrix& A) {
     return R;
 }
 
-matrix::Matrix GS_modified(matrix::Matrix& A) {
+Matrix GS_modified(Matrix& A) {
     size_t n = A.cols;
-    matrix::Matrix R = matrix::Matrix::zeros(n, n);
+    Matrix R = Matrix::zeros(n, n);
 
     for (size_t i = 0; i < n; ++i) {
         R(i, i) = norm(A(Slice(), i));
@@ -62,6 +69,64 @@ matrix::Matrix GS_modified(matrix::Matrix& A) {
         );
     }
     return R;
+}
+
+void householder(Matrix& A) {
+    size_t m = A.rows;
+    size_t n = A.cols;
+
+    for (size_t k = 0; k < std::min(m, n); ++k) {
+        Vector x = A(Slice(k, std::nullopt), k);
+
+        Vector e1 = Vector::zeros_like(x);
+        e1(0) = 1.0;
+
+        Vector vk = x + (e1 * norm(x) * sign(x(0)));
+
+        if (norm(vk) == 0) continue;
+
+        vk = vk * (1.0 / norm(vk));
+        A.replace(
+            Slice(k, std::nullopt),
+            Slice(k, std::nullopt),
+            A(Slice(k, std::nullopt), Slice(k, std::nullopt)) - 2 * outer(vk, dot(vk, A(Slice(k, std::nullopt), Slice(k, std::nullopt))))
+        );
+    }
+}
+
+Matrix solve_U(Matrix& U, Matrix& B) {
+    size_t m = U.rows;
+    Matrix X = Matrix::zeros(B.rows, B.cols);
+
+    X.replace(
+        m-1,
+        Slice(),
+        B(m-1, Slice()) * (1.0 / U(m-1, m-1))
+    );
+
+    for (size_t i = m-2; i >= 0; --i) {
+        X.replace(
+            i,
+            Slice(),
+            (B(i, Slice()) - dot(U(i, Slice(i+1, std::nullopt)), X(Slice(i+1, std::nullopt), Slice()))) * (1.0 / U(i, i))
+        );
+    }
+    return X;
+}
+
+std::tuple<Matrix, Matrix> householder_qr(Matrix& A) {
+    size_t m = A.rows;
+    size_t n = A.cols;
+
+    Matrix A_hat = hstack(A, Matrix::identity(m));
+
+    householder(A_hat);
+
+    Matrix R = A_hat(Slice(), Slice(0, n));
+    Matrix Q = A_hat(Slice(), Slice(n, std::nullopt));
+    Q = Q.transpose();
+
+    return std::make_tuple(Q, R);
 }
 
 } // namespace algorithms

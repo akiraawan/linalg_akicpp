@@ -147,12 +147,20 @@ bool Vector::operator!=(const Vector& other) const {
     return !(*this == other);
 }
 
+Vector operator*(const double scalar, const Vector& vector) {
+    return vector * scalar; // Reuse the existing operator* method
+}
+
 Vector Vector::zeros(size_t size) {
     return Vector(size, 0.0);
 }
 
 Vector Vector::ones(size_t size) {
     return Vector(size, 1.0);
+}
+
+Vector Vector::zeros_like(const Vector& other) {
+    return Vector(other.size, 0.0);
 }
 
 std::ostream& operator<<(std::ostream& os, const Vector& vector) {

@@ -39,8 +39,10 @@ public:
     bool operator==(const Vector& other) const; // Equality comparison
     bool operator!=(const Vector& other) const; // Inequality comparison
 
+    friend Vector operator*(const double scalar, const Vector& vector); // Scalar multiplication with scalar on the left
     static Vector zeros(size_t size);
     static Vector ones(size_t size);
+    static Vector zeros_like(const Vector& other);
 
     friend std::ostream& operator<<(std::ostream& os, const Vector& vector); // Overloaded output operator for printing
 };

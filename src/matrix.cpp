@@ -354,6 +354,10 @@ std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
     return os;
 }
 
+Matrix operator*(const double scalar, const Matrix& matrix) {
+    return matrix * scalar; // Reuse the existing operator* method
+}
+
 Matrix Matrix::zeros(size_t rows, size_t cols) {
     return Matrix(rows, cols, 0.0);
 }

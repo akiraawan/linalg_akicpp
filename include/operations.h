@@ -5,19 +5,30 @@
 #include "vector.h"
 #include <vector>
 
+using namespace la::matrix;
+using namespace la::vector;
+
 namespace la {
 
-double dot(const vector::Vector& a, const vector::Vector& b);
+double dot(const Vector& a, const Vector& b);
 
-vector::Vector dot(const matrix::Matrix& A, const vector::Vector& x);
+Vector dot(const Matrix& A, const Vector& x);
 
-vector::Vector dot(const vector::Vector& x, const matrix::Matrix& A);
+Vector dot(const Vector& x, const Matrix& A);
 
-matrix::Matrix outer(const vector::Vector& a, const vector::Vector& b);
+Matrix outer(const Vector& a, const Vector& b);
 
-vector::Vector solve_Q(const matrix::Matrix& Q, const vector::Vector& b);
+Vector solve_Q(const Matrix& Q, const Vector& b);
 
-double norm(const vector::Vector& vec);
+double norm(const Vector& vec);
+
+int sign(double value);
+
+Matrix hstack(const Matrix& A, const Matrix& B);
+Matrix hstack(const Matrix& A, const Vector& b);
+
+Matrix vstack(const Matrix& A, const Matrix& B);
+Matrix vstack(const Matrix& A, const Vector& b);
 
 } // namespace la
 
