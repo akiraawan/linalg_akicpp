@@ -8,8 +8,6 @@
 namespace la {
 namespace vector {
 
-class VectorSliceProxy; // Forward declaration
-
 class Vector {
 public:
     size_t size;

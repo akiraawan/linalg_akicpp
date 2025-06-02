@@ -95,6 +95,9 @@ void householder(Matrix& A) {
 }
 
 Matrix solve_U(Matrix& U, Matrix& B) {
+    if (U.rows != U.cols) {
+        throw std::invalid_argument("Matrix U must be square.");
+    }
     size_t m = U.rows;
     Matrix X = Matrix::zeros(B.rows, B.cols);
 
@@ -104,7 +107,7 @@ Matrix solve_U(Matrix& U, Matrix& B) {
         B(m-1, Slice()) * (1.0 / U(m-1, m-1))
     );
 
-    for (size_t i = m-2; i >= 0; --i) {
+    for (int i = m-2; i >= 0; --i) {
         X.replace(
             i,
             Slice(),
@@ -115,6 +118,9 @@ Matrix solve_U(Matrix& U, Matrix& B) {
 }
 
 std::tuple<Matrix, Matrix> householder_qr(Matrix& A) {
+    if (A.rows < A.cols) {
+        throw std::invalid_argument("Number of rows must be greater than or equal to the number of columns.");
+    }
     size_t m = A.rows;
     size_t n = A.cols;
 
@@ -149,6 +155,9 @@ vector::Vector householder_ls(Matrix& A, vector::Vector& b) {
 }
 
 void hessenberg(Matrix& A) {
+    if (A.rows != A.cols) {
+        throw std::invalid_argument("Matrix A must be square.");
+    }
     size_t m = A.rows;
 
     for (size_t k = 0; k < m - 2; ++k) {
@@ -174,6 +183,9 @@ void hessenberg(Matrix& A) {
 }
 
 Matrix hessenbergQ(Matrix& A) {
+    if (A.rows != A.cols) {
+        throw std::invalid_argument("Matrix A must be square.");
+    }
     size_t m = A.rows;
     Matrix Q = Matrix::identity(m);
 
@@ -200,6 +212,8 @@ Matrix hessenbergQ(Matrix& A) {
             Q(Slice(), Slice(k + 1, std::nullopt)) - 2 * outer(dot(Q(Slice(), Slice(k + 1, std::nullopt)), vk), vk)
         );
     }
+
+    return Q;
 }
 
 std::tuple<Vector, double> pow_it(const Matrix& A, const Vector& x0, double tol, size_t max_iter) {
