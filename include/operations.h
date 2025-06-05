@@ -18,8 +18,6 @@ Vector dot(const Vector& x, const Matrix& A);
 
 Matrix outer(const Vector& a, const Vector& b);
 
-Vector solve_Q(const Matrix& Q, const Vector& b);
-
 double norm(const Vector& vec);
 
 int sign(double value);

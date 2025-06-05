@@ -49,17 +49,6 @@ void test_outer_product() {
     std::cout << "Outer product test passed!" << std::endl;
 }
 
-void test_solve_Q() {
-    Matrix Q = Matrix({
-        {1, 0},
-        {0, 1}
-    });
-    Vector b = Vector({2, 3});
-    Vector result = solve_Q(Q, b);
-    assert(result == Vector({2, 3})); // Identity matrix should return the same vector
-    std::cout << "Solve Q test passed!" << std::endl;
-}
-
 void test_norm() {
     Vector vec = Vector({3, 4});
     double result = norm(vec);
@@ -118,7 +107,6 @@ int main() {
     test_dot_matvec();
     test_dot_vecmat();
     test_outer_product();
-    test_solve_Q();
     test_norm();
     test_sign();
     test_hstack();

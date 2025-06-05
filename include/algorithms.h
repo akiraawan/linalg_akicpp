@@ -19,7 +19,9 @@ Matrix GS_modified(Matrix& A);
 
 void householder(Matrix& A);
 
-Matrix solve_U(Matrix& , Matrix& B);
+Vector solve_Q(const Matrix& Q, const Vector& b);
+
+Matrix solve_U(const Matrix& U, const Matrix& B);
 
 std::tuple<Matrix, Matrix> householder_qr(Matrix& A);
 

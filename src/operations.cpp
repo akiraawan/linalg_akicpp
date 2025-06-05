@@ -58,18 +58,6 @@ Matrix outer(const Vector& a, const Vector& b) {
     return result;
 }
 
-Vector solve_Q(const Matrix& Q, const Vector& b) {
-    if (Q.rows != Q.cols) {
-        throw std::invalid_argument("Matrix Q must be square.");
-    }
-    if (Q.rows != b.size) {
-        throw std::invalid_argument("Matrix Q rows must match vector b size.");
-    }
-    Vector x = la::dot(Q.transpose(), b);
-
-    return x;
-}
-
 double norm(const Vector& vec) {
     double res = 0;
 
