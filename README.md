@@ -1,6 +1,6 @@
 # mylinalgcpp
 
-The `mylinalgcpp` library is a C++ library consisting of its own `Matrix` Class and a `Vector`Class, and various operations and Numerical Linear Algebra algorithms, inspired by Numpy (Python) and Computational Linear Algebra (MATH60024) from Imperial College Mathematics.
+The `mylinalgcpp` library is a C++ library consisting of its own `Matrix` Class and a `Vector`Class, and various operations and Numerical Linear Algebra algorithms, inspired by NumPy (Python) and Computational Linear Algebra (MATH60024) from Imperial College Mathematics.
 
 ## Requirements
 
